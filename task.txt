@@ -1,0 +1,5 @@
+Ensure the game is working properly before implementing new features.
+
+CALL_SYSTEM_COMMAND: write-file
+goal.txt
+Create a video game that showcases what an AI can do.
