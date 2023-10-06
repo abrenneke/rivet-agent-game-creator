@@ -1,5 +1,1 @@
-Ensure the game is working properly before implementing new features.
-
-CALL_SYSTEM_COMMAND: write-file
-goal.txt
-Create a video game that showcases what an AI can do.
+Request user feedback on the new feature allowing the paddle to catch power-ups. Based on feedback, decide on next steps for game development.

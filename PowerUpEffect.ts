@@ -19,21 +19,29 @@ export const PowerUpEffect = {
     NEGATIVE_POINTS: 'NEGATIVE_POINTS',
 };
 
-export function applyPowerUp(powerUp: PowerUpEffectInterface, paddle: Paddle, ball: Ball) {
+export function applyPowerUp(powerUp: PowerUpEffectInterface, paddle?: Paddle, ball?: Ball) {
     switch (powerUp.effect) {
         case PowerUpEffect.DOUBLE_PADDLE_WIDTH:
-            paddle.width *= 2;
+            if (paddle) {
+                paddle.width *= 2;
+            }
             break;
         case PowerUpEffect.HALF_PADDLE_WIDTH:
-            paddle.width /= 2;
+            if (paddle) {
+                paddle.width /= 2;
+            }
             break;
         case PowerUpEffect.DOUBLE_BALL_SPEED:
-            ball.dx *= 2;
-            ball.dy *= 2;
+            if (ball) {
+                ball.dx *= 2;
+                ball.dy *= 2;
+            }
             break;
         case PowerUpEffect.HALF_BALL_SPEED:
-            ball.dx /= 2;
-            ball.dy /= 2;
+            if (ball) {
+                ball.dx /= 2;
+                ball.dy /= 2;
+            }
             break;
         case PowerUpEffect.EXTRA_POINTS:
             console.log("Extra points power-up applied");

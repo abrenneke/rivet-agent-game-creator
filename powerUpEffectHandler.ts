@@ -9,6 +9,8 @@ export class PowerUpEffectHandler {
             'slowDown': () => { return 0.5; },
             'sizeUp': () => { return 1.5; },
             'sizeDown': () => { return 0.5; },
+            'paddleSpeedUp': () => { return 2; },
+            'paddleSlowDown': () => { return 0.5; }
         };
     }
 

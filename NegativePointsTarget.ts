@@ -23,11 +23,17 @@ export default class NegativePointsTarget {
     }
 
     handleCollision(paddle: Paddle, ball: Ball): void {
-        // Emit an event when a collision occurs
-        const event = new CustomEvent('negativePointsCollision', { detail: { points: -10 } });
-        window.dispatchEvent(event);
+        // Check if the collision is with the paddle
+        if (paddle.isColliding(this)) {
+            // Apply the power-up effect to the paddle
+            applyPowerUp(this.powerUpEffect, paddle);
+        } else {
+            // Emit an event when a collision occurs
+            const event = new CustomEvent('negativePointsCollision', { detail: { points: -10 } });
+            window.dispatchEvent(event);
 
-        // Apply the power-up effect
-        applyPowerUp(this.powerUpEffect, paddle, ball);
+            // Apply the power-up effect to the ball
+            applyPowerUp(this.powerUpEffect, paddle, ball);
+        }
     }
 }
