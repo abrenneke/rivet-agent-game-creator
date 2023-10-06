@@ -1,8 +1,9 @@
 {
   "scripts": {
     "build": "webpack",
+    "watch": "webpack --watch",
     "start": "node server.js",
-    "compile": "npx tsc",
+    "compile": "tsc --project .",
     "test": "jest"
   },
   "devDependencies": {

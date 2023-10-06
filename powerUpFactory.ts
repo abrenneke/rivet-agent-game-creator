@@ -1,17 +1,16 @@
+import Paddle from './paddle';
 import { PowerUpEffect, PowerUpEffectInterface } from './powerUp';
 
-class PowerUpFactory {
-    static powerUpEffects: PowerUpEffect[] = ['speedUp', 'slowDown', 'sizeUp', 'sizeDown'];
+export default class PowerUpFactory {
+    static createPowerUp(paddle: Paddle): PowerUpEffectInterface {
+        const powerUpEffects = Object.values(PowerUpEffect);
+        const randomEffect = powerUpEffects[Math.floor(Math.random() * powerUpEffects.length)];
 
-    static createPowerUp(): PowerUpEffectInterface {
-        const x = Math.random() * 800; // game width
-        const y = Math.random() * 600; // game height
-        const radius = 20; // fixed radius for power-ups
-        const effect = this.powerUpEffects[Math.floor(Math.random() * this.powerUpEffects.length)];
-        const reset = () => {}; // reset function currently does nothing
-
-        return { x, y, radius, effect, reset };
+        return {
+            x: paddle.x + paddle.width / 2,
+            y: paddle.y,
+            radius: 5,
+            effect: randomEffect
+        };
     }
 }
-
-export default PowerUpFactory;

@@ -1,20 +1,44 @@
-import { PowerUpEffectInterface } from "./powerUp";
-import { PowerUpEffect } from "./powerUp";
+import Paddle from './paddle';
 
-export default abstract class PowerUpEffectClass implements PowerUpEffectInterface {
-    constructor(public effect: PowerUpEffect, public radius: number, public x: number, public y: number, public color: string) {}
+export type PowerUpEffectType = 'DOUBLE_PADDLE_WIDTH' | 'HALF_PADDLE_WIDTH' | 'DOUBLE_BALL_SPEED' | 'HALF_BALL_SPEED' | 'EXTRA_POINTS' | 'NEGATIVE_POINTS';
 
-    abstract handleCollision(): void;
+export interface PowerUpEffectInterface {
+    x: number;
+    y: number;
+    radius: number;
+    effect: PowerUpEffectType;
+}
 
-    reset(): void {
-        this.effect = 'sizeDown';
-    }
+export const PowerUpEffect = {
+    DOUBLE_PADDLE_WIDTH: 'DOUBLE_PADDLE_WIDTH',
+    HALF_PADDLE_WIDTH: 'HALF_PADDLE_WIDTH',
+    DOUBLE_BALL_SPEED: 'DOUBLE_BALL_SPEED',
+    HALF_BALL_SPEED: 'HALF_BALL_SPEED',
+    EXTRA_POINTS: 'EXTRA_POINTS',
+    NEGATIVE_POINTS: 'NEGATIVE_POINTS',
+};
 
-    draw(ctx: CanvasRenderingContext2D): void {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
+export function applyPowerUp(powerUp: PowerUpEffectInterface, paddle: Paddle) {
+    switch (powerUp.effect) {
+        case PowerUpEffect.DOUBLE_PADDLE_WIDTH:
+            paddle.width *= 2;
+            break;
+        case PowerUpEffect.HALF_PADDLE_WIDTH:
+            paddle.width /= 2;
+            break;
+        case PowerUpEffect.DOUBLE_BALL_SPEED:
+            paddle.y *= 2;
+            break;
+        case PowerUpEffect.HALF_BALL_SPEED:
+            paddle.y /= 2;
+            break;
+        case PowerUpEffect.EXTRA_POINTS:
+            console.log("Extra points power-up applied");
+            break;
+        case PowerUpEffect.NEGATIVE_POINTS:
+            console.log("Negative points power-up applied");
+            break;
+        default:
+            break;
     }
 }
