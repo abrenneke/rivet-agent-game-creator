@@ -1,6 +1,5 @@
-import { PowerUpEffectInterface } from './powerUp';
+import { PowerUpEffectInterface } from './PowerUpEffect';
 import { PowerUpEffectHandler } from './powerUpEffectHandler';
-import CollisionHandler from './collisionHandler';
 import { activateEffect } from './activateEffect';
 import { deactivateEffect } from './deactivateEffect';
 import Paddle from './paddle';
@@ -72,7 +71,20 @@ export default class Ball {
     }
 
     handlePaddleCollision() {
-        CollisionHandler.handleCollision(this, this.paddle);
+        const relativeIntersectX = (this.paddle.x + (this.paddle.width / 2)) - this.x;
+
+        const normalizedIntersectX = relativeIntersectX / (this.paddle.width / 2);
+
+        const bounceAngle = normalizedIntersectX * (5 * Math.PI / 12);
+
+        const speed = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+
+        this.dx = speed * this.speedMultiplier * Math.sin(-bounceAngle);
+        this.dy = -speed * this.speedMultiplier * Math.cos(bounceAngle);
+
+        if (this.effect) {
+            this.activateEffect(this.effect);
+        }
     }
 
     activateEffect(effect: string) {

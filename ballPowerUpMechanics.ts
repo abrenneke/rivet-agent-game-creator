@@ -1,6 +1,6 @@
 import Ball from './ball';
 import Paddle from './paddle';
-import { PowerUpEffectInterface, PowerUpEffect, applyPowerUp } from './powerUp';
+import { PowerUpEffectInterface, PowerUpEffect, applyPowerUp } from './PowerUpEffect';
 
 export default class BallPowerUpMechanics {
     private activePowerUps: PowerUpEffectInterface[] = [];
@@ -9,10 +9,10 @@ export default class BallPowerUpMechanics {
         [PowerUpEffect.HALF_BALL_SPEED]: (ball: Ball) => ball.dy /= 2
     };
 
-    applyPowerUpToBall(paddle: Paddle, powerUp: PowerUpEffectInterface) {
+    applyPowerUpToBall(paddle: Paddle, ball: Ball, powerUp: PowerUpEffectInterface) {
         if (this.effectHandlers[powerUp.effect]) {
             this.activePowerUps.push(powerUp);
-            applyPowerUp(powerUp, paddle);
+            applyPowerUp(powerUp, paddle, ball);
         }
     }
 

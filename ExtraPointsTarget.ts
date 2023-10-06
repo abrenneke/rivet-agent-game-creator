@@ -1,4 +1,5 @@
 import { PowerUpEffectInterface, applyPowerUp } from './PowerUpEffect';
+import Ball from './ball';
 import Paddle from './paddle';
 
 export default class ExtraPointsTarget {
@@ -21,13 +22,13 @@ export default class ExtraPointsTarget {
         };
     }
 
-    handleCollision(paddle: Paddle): void {
+    handleCollision(paddle: Paddle, ball: Ball): void {
         // Emit an event when a collision occurs
         const event = new CustomEvent('extraPointsCollision', { detail: { points: 10 } });
         window.dispatchEvent(event);
 
         // Apply the power-up effect
-        applyPowerUp(this.powerUpEffect, paddle);
+        applyPowerUp(this.powerUpEffect, paddle, ball);
     }
 
     update(canvasWidth: number, canvasHeight: number) {

@@ -2,7 +2,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "start": "node server.js",
+    "start": "echo 'open the game in the browser'",
     "compile": "tsc --project .",
     "test": "jest"
   },

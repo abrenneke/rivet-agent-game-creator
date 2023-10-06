@@ -1,4 +1,5 @@
 import { PowerUpEffectInterface, applyPowerUp } from './PowerUpEffect';
+import Ball from './ball';
 import Paddle from './paddle';
 
 export default class NegativePointsTarget {
@@ -21,12 +22,12 @@ export default class NegativePointsTarget {
         };
     }
 
-    handleCollision(paddle: Paddle): void {
+    handleCollision(paddle: Paddle, ball: Ball): void {
         // Emit an event when a collision occurs
         const event = new CustomEvent('negativePointsCollision', { detail: { points: -10 } });
         window.dispatchEvent(event);
 
         // Apply the power-up effect
-        applyPowerUp(this.powerUpEffect, paddle);
+        applyPowerUp(this.powerUpEffect, paddle, ball);
     }
 }
