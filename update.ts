@@ -1,20 +1,17 @@
-import Ball from './ball';
-import Paddle from './paddle';
-import BallPowerUpMechanics from './ballPowerUpMechanics';
-import ExtraPointsTarget from './ExtraPointsTarget';
-import Brick from './Brick';
+import { GameObjects } from './types';
 
-function update(paddle: Paddle, ball: Ball, extraPointsTarget: ExtraPointsTarget, ballPowerUpMechanics: BallPowerUpMechanics, bricks: Brick[], canvasWidth: number, canvasHeight: number) {
-    paddle.update(canvasWidth);
-    ball.update(canvasWidth, canvasHeight);
-    extraPointsTarget.update(canvasWidth, canvasHeight);
-    ballPowerUpMechanics.updateBall(ball);
+function update(gameObjects: GameObjects, canvas: HTMLCanvasElement) {
+    gameObjects.paddle.update(canvas.width);
+    gameObjects.ball.update(canvas.width, canvas.height);
+    gameObjects.extraPointsTarget.update(canvas.width, canvas.height);
+    gameObjects.ballPowerUpMechanics.updateBall(gameObjects.ball);
+    gameObjects.paddlePowerUpMechanics.updatePaddle(gameObjects.paddle);
 
     // Check for collisions with bricks
-    for (let i = 0; i < bricks.length; i++) {
-        if (bricks[i].intersects(ball)) {
-            bricks[i].handleCollision();
-            ball.dy = -ball.dy; // Change ball direction
+    for (let i = 0; i < gameObjects.bricks.length; i++) {
+        if (gameObjects.bricks[i].intersects(gameObjects.ball)) {
+            gameObjects.bricks[i].handleCollision();
+            gameObjects.ball.dy = -gameObjects.ball.dy; // Change ball direction
             break; // Break as soon as a collision is detected and handled
         }
     }

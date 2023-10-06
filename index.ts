@@ -9,7 +9,7 @@ let gameObjects = initializeGame(canvas);
 
 function gameLoop() {
     draw(ctx, gameObjects);
-    update(gameObjects.paddle, gameObjects.ball, gameObjects.extraPointsTarget, gameObjects.ballPowerUpMechanics, gameObjects.bricks, canvas.width, canvas.height);
+    update(gameObjects, canvas);
     requestAnimationFrame(gameLoop);
 }
 

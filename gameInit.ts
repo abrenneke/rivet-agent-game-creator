@@ -3,13 +3,16 @@ import Paddle from './paddle';
 import BallPowerUpMechanics from './ballPowerUpMechanics';
 import ExtraPointsTarget from './ExtraPointsTarget';
 import Brick from './Brick';
+import PaddlePowerUpMechanics from './PaddlePowerUpMechanics';
+import { GameObjects } from './types';
 
-export function initializeGame(canvas: HTMLCanvasElement) {
+export function initializeGame(canvas: HTMLCanvasElement): GameObjects {
     const paddleHeight = 20;
     const paddle = new Paddle(100, canvas.height - paddleHeight, 100, paddleHeight, canvas);
     const ball = new Ball(canvas.width / 2, canvas.height - paddleHeight - 10, 2, -2, 10, 'red', paddle);
     const extraPointsTarget = new ExtraPointsTarget(50, 50, 10, 30, 'green');
     const ballPowerUpMechanics = new BallPowerUpMechanics();
+    const paddlePowerUpMechanics = new PaddlePowerUpMechanics();
 
     // Create bricks
     const bricks: Brick[] = [];
@@ -31,6 +34,7 @@ export function initializeGame(canvas: HTMLCanvasElement) {
         ball,
         extraPointsTarget,
         ballPowerUpMechanics,
+        paddlePowerUpMechanics,
         bricks
     };
 }
